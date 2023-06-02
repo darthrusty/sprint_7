@@ -8,12 +8,15 @@ import static io.restassured.RestAssured.given;
 
 public class CourierClient extends BaseClient{
 
+    private static final String COURIER_API_URL       = "api/v1/courier";
+    private static final String COURIER_LOGIN_API_URL = "api/v1/courier/login";
+
     public ValidatableResponse create(CreateCourier createCourier) {
         return given()
                     .spec(getSpec())
                     .body(createCourier)
                     .when()
-                    .post("api/v1/courier")
+                    .post(COURIER_API_URL)
                     .then();
     }
 
@@ -22,16 +25,16 @@ public class CourierClient extends BaseClient{
                     .spec(getSpec())
                     .body(loginCourier)
                     .when()
-                    .post("api/v1/courier/login")
+                    .post(COURIER_LOGIN_API_URL)
                     .then();
     }
 
     public ValidatableResponse delete(Integer id) {
         return given()
-                   .spec(getSpec())
+                    .spec(getSpec())
                     .pathParams("id", id)
                     .when()
-                    .delete("api/v1/courier/{id}")
+                    .delete(COURIER_API_URL + "/{id}")
                     .then();
     }
 

@@ -1,6 +1,7 @@
 package ru.yandex.sprint7;
 
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
@@ -8,19 +9,21 @@ import org.junit.Test;
 import ru.yandex.sprint7.clients.CourierClient;
 import ru.yandex.sprint7.pojo.CreateCourier;
 import ru.yandex.sprint7.pojo.LoginCourier;
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 public class CourierLoginTest {
 
     private CourierClient courierClient = new CourierClient();
-    private String login     = "ninjazz007";
-    private String password  = "1234";
+    private String login     = RandomStringUtils.randomAlphabetic(8);
+    private String password  = RandomStringUtils.randomAlphabetic(8);
+    private String firstName = RandomStringUtils.randomAlphabetic(8);
 
     @Before
-    public void CreateCourier() {
+    public void createCourier() {
 
         CreateCourier createCourier = new CreateCourier();
         createCourier.setLogin(login);
-        createCourier.setFirstName("firstName");
+        createCourier.setFirstName(firstName);
         createCourier.setPassword(password);
 
         courierClient.create(createCourier)
@@ -30,7 +33,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Удачный логин курьера")
-    public void LoginCourier() {
+    public void loginCourier() {
         LoginCourier loginCourier = new LoginCourier();
         loginCourier.setLogin(login);
         loginCourier.setPassword(password);
@@ -42,7 +45,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("неудачный логин курьера без логина")
-    public void LoginCourierWithoutLogin() {
+    public void loginCourierWithoutLogin() {
         LoginCourier loginCourier = new LoginCourier();
         loginCourier.setPassword(password);
 
@@ -53,7 +56,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("неудачный логин курьера без пароля")
-    public void LoginCourierWithoutPassword() {
+    public void loginCourierWithoutPassword() {
         LoginCourier loginCourier = new LoginCourier();
         loginCourier.setLogin(login);
 
@@ -64,7 +67,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("неудачный логин курьера с неправильным логином")
-    public void LoginCourierWithWrongLogin() {
+    public void loginCourierWithWrongLogin() {
         LoginCourier loginCourier = new LoginCourier();
         loginCourier.setLogin(login + "a");
         loginCourier.setPassword(password);
@@ -75,7 +78,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("неудачный логин курьера с неправильным паролем")
-    public void LoginCourierWithWrongPassword() {
+    public void loginCourierWithWrongPassword() {
         LoginCourier loginCourier = new LoginCourier();
         loginCourier.setLogin(login);
         loginCourier.setPassword(password + "a");
@@ -86,7 +89,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("неудачный логин курьера с несуществующим логином")
-    public void LoginNonexistentCourier() {
+    public void loginNonexistentCourier() {
         Integer id;
         LoginCourier loginCourier = new LoginCourier();
         loginCourier.setLogin(login);

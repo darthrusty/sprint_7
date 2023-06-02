@@ -7,17 +7,18 @@ import org.junit.Test;
 import ru.yandex.sprint7.clients.CourierClient;
 import ru.yandex.sprint7.pojo.CreateCourier;
 import ru.yandex.sprint7.pojo.LoginCourier;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class CourierCreateTest {
 
     private CourierClient courierClient = new CourierClient();
-    private String login     = "ninjazz007";
-    private String password  = "1234";
-    private String firstName = "saske";
+    private String login     = RandomStringUtils.randomAlphabetic(8);
+    private String password  = RandomStringUtils.randomAlphabetic(8);
+    private String firstName = RandomStringUtils.randomAlphabetic(8);
 
     @Test
     @DisplayName("Успешное создание курьера")
-    public void CreateCourier() {
+    public void createCourier() {
 
         CreateCourier createCourier = new CreateCourier();
         createCourier.setLogin(login);
@@ -31,7 +32,7 @@ public class CourierCreateTest {
 
     @Test
     @DisplayName("неуспешное создание курьера с аналогичными параметрами")
-    public void CreateTwinCourier() {
+    public void createTwinCourier() {
 
         CreateCourier createCourier = new CreateCourier();
         createCourier.setLogin(login);
@@ -48,7 +49,7 @@ public class CourierCreateTest {
 
     @Test
     @DisplayName("Неуспешное создание курьера без пароля")
-    public void CreateCourierWithoutPassword() {
+    public void createCourierWithoutPassword() {
         CreateCourier createCourier = new CreateCourier();
         createCourier.setLogin(login);
         createCourier.setFirstName(firstName);
@@ -60,7 +61,7 @@ public class CourierCreateTest {
 
     @Test
     @DisplayName("Неуспешное создание курьера без логина")
-    public void CreateCourierWithoutLogin() {
+    public void createCourierWithoutLogin() {
         CreateCourier createCourier = new CreateCourier();
         createCourier.setFirstName(firstName);
         createCourier.setPassword(password);
@@ -72,7 +73,7 @@ public class CourierCreateTest {
 
     @Test
     @DisplayName("Неуспешное создание курьера без фамилии")
-    public void CreateCourierWithoutFirstName() {
+    public void createCourierWithoutFirstName() {
         CreateCourier createCourier = new CreateCourier();
         createCourier.setLogin(login);
         createCourier.setPassword(password);

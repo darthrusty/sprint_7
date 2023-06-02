@@ -1,22 +1,24 @@
 package ru.yandex.sprint7;
 
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import ru.yandex.sprint7.pojo.GetOrderList;
 import ru.yandex.sprint7.clients.OrderClient;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class OrderListTest {
 
     private OrderClient orderClient = new OrderClient();
-    private Integer courierId = 5;
-    private String nearestStation = "1";
-    private Integer limit = 30;
-    private Integer page = 0;
+    private Integer courierId     = ThreadLocalRandom.current().nextInt(1, 10);
+    private String nearestStation = RandomStringUtils.randomAlphabetic(8);
+    private Integer limit         = ThreadLocalRandom.current().nextInt(1, 30);
+    private Integer page          = ThreadLocalRandom.current().nextInt(1, 10);
 
     @Test
     @DisplayName("Проверка получения списка заказов")
-    public void GetOrderList() {
+    public void getOrderList() {
 
         GetOrderList getOrderList = new GetOrderList();
         getOrderList.setCourierId(courierId);
@@ -26,7 +28,7 @@ public class OrderListTest {
 
         orderClient.getList(getOrderList)
                 .statusCode(200)
-                .body("orders", notNullValue());
+                .body("orders", Matchers.not(Matchers.emptyArray()));
     }
 
 }

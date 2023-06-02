@@ -8,12 +8,14 @@ import static io.restassured.RestAssured.given;
 
 public class OrderClient extends BaseClient{
 
+    private static final String ORDER_API_URL = "api/v1/orders";
+
     public ValidatableResponse create(CreateOrder сreateOrder) {
         return given()
                 .spec(getSpec())
                 .body(сreateOrder)
                 .when()
-                .post("api/v1/orders")
+                .post(ORDER_API_URL)
                 .then();
     }
 
@@ -22,7 +24,7 @@ public class OrderClient extends BaseClient{
                 .spec(getSpec())
                 .body(getOrderList)
                 .when()
-                .get("api/v1/orders")
+                .get(ORDER_API_URL)
                 .then();
     }
 

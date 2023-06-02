@@ -7,11 +7,13 @@ import io.restassured.specification.RequestSpecification;
 
 public class BaseClient {
 
+    private static final String MAIN_URL = "http://qa-scooter.praktikum-services.ru/";
+
     protected RequestSpecification getSpec() {
         return new RequestSpecBuilder()
                 .log(LogDetail.ALL)
                 .setContentType(ContentType.JSON)
-                .setBaseUri("http://qa-scooter.praktikum-services.ru/")
+                .setBaseUri(MAIN_URL)
                 .build();
     }
 

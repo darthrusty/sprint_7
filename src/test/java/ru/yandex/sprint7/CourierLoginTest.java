@@ -9,14 +9,17 @@ import org.junit.Test;
 import ru.yandex.sprint7.clients.CourierClient;
 import ru.yandex.sprint7.pojo.CreateCourier;
 import ru.yandex.sprint7.pojo.LoginCourier;
+import net.datafaker.Faker;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 public class CourierLoginTest {
 
+    Faker faker = new Faker();
+
     private CourierClient courierClient = new CourierClient();
     private String login     = RandomStringUtils.randomAlphabetic(8);
     private String password  = RandomStringUtils.randomAlphabetic(8);
-    private String firstName = RandomStringUtils.randomAlphabetic(8);
+    private String firstName = faker.name().firstName();
 
     @Before
     public void createCourier() {

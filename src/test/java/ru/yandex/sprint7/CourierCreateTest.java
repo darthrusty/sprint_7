@@ -8,13 +8,16 @@ import ru.yandex.sprint7.clients.CourierClient;
 import ru.yandex.sprint7.pojo.CreateCourier;
 import ru.yandex.sprint7.pojo.LoginCourier;
 import org.apache.commons.lang3.RandomStringUtils;
+import net.datafaker.Faker;
 
 public class CourierCreateTest {
+
+    Faker faker = new Faker();
 
     private CourierClient courierClient = new CourierClient();
     private String login     = RandomStringUtils.randomAlphabetic(8);
     private String password  = RandomStringUtils.randomAlphabetic(8);
-    private String firstName = RandomStringUtils.randomAlphabetic(8);
+    private String firstName = faker.name().firstName();
 
     @Test
     @DisplayName("Успешное создание курьера")

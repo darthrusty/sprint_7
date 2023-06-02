@@ -10,19 +10,22 @@ import ru.yandex.sprint7.pojo.CreateOrder;
 import java.util.concurrent.ThreadLocalRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import net.datafaker.Faker;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @RunWith(Parameterized.class)
 public class OrderCreateTest {
 
+    Faker faker = new Faker();
+
     private OrderClient orderClient = new OrderClient();
 
-    private String firstName    = RandomStringUtils.randomAlphabetic(8);
-    private String lastName     = RandomStringUtils.randomAlphabetic(8);
-    private String address      = RandomStringUtils.randomAlphabetic(8);
+    private String firstName    = faker.name().firstName();
+    private String lastName     = faker.name().lastName();
+    private String address      = faker.address().streetAddress();
     private String metroStation = RandomStringUtils.randomAlphabetic(2);
-    private String phone        = RandomStringUtils.randomAlphabetic(12);
+    private String phone        = faker.phoneNumber().cellPhone();
     private int rentTime        = ThreadLocalRandom.current().nextInt(1, 30);
     private String deliveryDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private String comment      = RandomStringUtils.randomAlphabetic(33);
